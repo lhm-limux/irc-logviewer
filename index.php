@@ -1,7 +1,7 @@
 <?php
 	// Version string in URLs is used to prevent unwanted caching of JS and CSS files following upgrades.
 	// As a side effect, also causes browsers to more aggressively cache as long as it remains unchanged.
-	$version = "0.23b";
+	$version = "0.24b";
 	
 	if (!file_exists(dirname(_FILE_).'/lib/config.ini'))
 		die("<b>Error:</b> ./lib/config.ini not found! Please copy <i>config.ini-dist</i> to <i>config.ini</i> and configure appropriately.");		
@@ -48,7 +48,7 @@
 											
 				<div id="datePicker">
 					<div class="heading">View By Date</div>
-					%CALENDAR_DATE_PICKER%
+					<p>%DATE_PICKER%</p>
 				</div>
 			</div>
 				

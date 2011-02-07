@@ -141,8 +141,9 @@ class Search {
 			$searchResult->duration = $searchResult->endTime - $searchResult->startTime;
 			
 			// Convert from UNIX timestamps to a human readable timestamp
-			$searchResult->startTime = date('Y-m-d H:i', $searchResult->startTime);
-			$searchResult->endTime = date('Y-m-d H:i', $searchResult->endTime);
+			$searchResult->date = date('Y-m-d', $searchResult->startTime);
+			$searchResult->startTime = date('H:i', $searchResult->startTime);
+			$searchResult->endTime = date('H:i', $searchResult->endTime);
 			 		 
 			// Sort keyword and user arrays by frequency of mentions
 			arsort($searchResult->keywords, SORT_NUMERIC);

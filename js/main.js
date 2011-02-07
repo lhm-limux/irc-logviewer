@@ -66,17 +66,17 @@ ircLogSearch.selectConversation = function(element, server, channel, startTime, 
 }
 
 
-ircLogSearch.getConversation = function(server, channel, startTime, endTime, keywords) {
+ircLogSearch.getConversation = function(server, channel, date, startTime, endTime, keywords) {
 
 	jQuery('#ircLogSearchResultsLogViewWrapper').html('');	
 	
 	$.ajax({		
-		url: "ajax/GetConversation.php?timestamp=" + (new Date().getTime().toString()) + "&server=" + encodeURIComponent(server) + "&channel=" + encodeURIComponent(channel) + "&startTime=" + encodeURIComponent(startTime)+ "&endTime=" + encodeURIComponent(endTime)+"&keywords="+keywords,
+		url: "ajax/GetConversation.php?timestamp=" + (new Date().getTime().toString()) + "&server=" + encodeURIComponent(server) + "&channel=" + encodeURIComponent(channel) + "&startTime="  + date + "+" + encodeURIComponent(startTime)+ "&endTime=" + date + "+" + encodeURIComponent(endTime)+"&keywords="+keywords,
 		type: "GET",
 		dataType: "json",
 		success: function(json) {
 
-			jQuery('#ircLogSearchResultsLogView').html('<div class="heading">Chat Log - ' + channel +'</div>'
+			jQuery('#ircLogSearchResultsLogView').html('<div class="heading">Chat Log - ' + channel + ' - ' + date + '</div>'
                                                       +'<div id="ircLogSearchResultsLogViewWrapper"></div>');		
 			ircLogSearch.redrawWindow();
 		
@@ -135,7 +135,7 @@ ircLogSearch.search = function() {
 			
 			// If we get a response with any matches, immedaitely start getting the first entry in the background
 			if (json['searchResults'].length > 0)
-				ircLogSearch.getConversation(server, channel, json['searchResults'][0].startTime, json['searchResults'][0].endTime, keywords);
+				ircLogSearch.getConversation(server, channel, json['searchResults'][0].date, json['searchResults'][0].startTime, json['searchResults'][0].endTime, keywords);
 
 			
 			jQuery('#searchResults').html('');
@@ -152,8 +152,8 @@ ircLogSearch.search = function() {
 					if (usersHtml != '')
 						usersHtml += ', ';
 						
-					usersHtml += '<div class="ircConversationParticipant">' + user + '</div> (' + json['searchResults'][i].users[user] + ')';
-					
+					//usersHtml += '<div class="ircConversationParticipant">' + user + '</div> (' + json['searchResults'][i].users[user] + ')';
+					usersHtml += '<div class="ircConversationParticipant">' + user + '</div>';
 				}
 
 				var keywordsHtml = '';
@@ -161,8 +161,8 @@ ircLogSearch.search = function() {
 					if (keywordsHtml != '')
 						keywordsHtml += ', ';
 						
-					keywordsHtml += '<div class="ircConversationKeyword">' + keyword + '</div> (' + json['searchResults'][i].keywords[keyword] + ')';
-					
+					//keywordsHtml += '<div class="ircConversationKeyword">' + keyword + '</div> (' + json['searchResults'][i].keywords[keyword] + ')';
+					keywordsHtml += '<div class="ircConversationKeyword">' + keyword + '</div>';
 				}
 				
 				var duration = Math.floor(json['searchResults'][i].duration / 60);
@@ -184,15 +184,18 @@ ircLogSearch.search = function() {
 				}
 										
 				jQuery('#searchResults').append(	'<div class="' + conversationClass + '" '
-																    +'onclick="ircLogSearch.selectConversation(this, \''+server+'\', \''+channel+'\', \'' + json['searchResults'][i].startTime+'\', \'' + json['searchResults'][i].endTime+'\', \''+encodeURIComponent(keywords)+'\');">'
-
-															+'<div><div class="ircConversationLabel">Start:</div>' + json['searchResults'][i].startTime + '</div>'
-															+'<div><div class="ircConversationLabel">End:</div>' + json['searchResults'][i].endTime + '</div>'
-															+'<div><div class="ircConversationLabel">Duration:</div>' + duration + '</div>'
-															+'<div><div class="ircConversationLabel">Keywords:</div><div class="ircConversationValues">' + keywordsHtml + '</div></div>'
-															+'<div><div class="ircConversationLabel">Users:</div><div class="ircConversationValues">' + usersHtml + '</div></div>'
-															+'<div class="selectedArrow">&gt;</div>'
-															+'</div>');	
+													+'onclick="ircLogSearch.selectConversation(this, \''+server+'\''
+													+', \''+channel+'\''
+													+', \'' + json['searchResults'][i].date+'\''
+													+', \'' + json['searchResults'][i].startTime+'\''
+													+', \'' + json['searchResults'][i].endTime+'\''
+													+', \''+encodeURIComponent(keywords)+'\');">'
+													+' <div class="dateRow"><div class="date">' + json['searchResults'][i].date + '&nbsp;&nbsp;' + json['searchResults'][i].startTime + '-' + json['searchResults'][i].endTime + '</div></div>'
+													+' <div><div class="ircConversationLabel">Duration:</div>' + duration + '</div>'
+													+' <div><div class="ircConversationLabel">Keywords:</div><div class="ircConversationValues">' + keywordsHtml + '</div></div>'
+													+' <div><div class="ircConversationLabel">Users:</div><div class="ircConversationValues">' + usersHtml + '</div></div>'
+													+' <div class="selectedArrow">&gt;</div>'
+													+'</div>');	
 			}
 											
 			ircLogSearch.redrawWindow();				

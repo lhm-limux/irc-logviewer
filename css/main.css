@@ -145,13 +145,9 @@ div {
 	dmax-height: 20px;	
 }
 
-#ircLogSearchForm input:hover }
-	color: #444;		
-}
-
-#ircLogSearchForm input:hover,
-#ircLogSearchForm button:hover {
-	border-color: #aaa;
+#searchBox:hover input,
+#searchBox:hover button {
+	border-color: #999;
 }
 
 /* Gecko specific rendering tweak */
@@ -170,7 +166,7 @@ div {
 	height: auto;
 	float: left;
 	border-right: 1px solid #bbb;		
-	background: #f9f9f9;
+	background: #f1f1f1;
 	font-size: 8pt;
 }
 
@@ -199,9 +195,9 @@ div {
 	position: relative;
 	color: #777;
 	padding: 8px;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid #ccc;
 	border-top: 1px solid #fff;
-	background: #f9f9f9; 	
+	background: #f1f1f1; 	
 }
 
 
@@ -209,9 +205,11 @@ div {
 	cursor: pointer;
 	color: #555;	
 	background: #fff;	
-	background: -moz-linear-gradient(top, #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* ie */	
+	/*
+	background: -moz-linear-gradient(top, #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff));
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 );
+	*/
 }
 
 #leftNavigation .conversation:hover .ircConversationLabel {
@@ -261,6 +259,7 @@ div {
 	overflow: auto;
 	text-align: center;
 	font-size: 10pt;
+	background: #f9f9f9;	
 }
 
 #searchResults p {
@@ -277,6 +276,37 @@ div {
 	margin-top: 10px;
 }
 
+#leftNavigation .conversation .date {
+	display: inline;	
+	font-size: 10pt;
+	padding: 2px;
+	text-align: center;
+	background: #aaa;
+	color: #fff;
+	padding-right: 8px;
+	padding-left: 8px;		
+	margin-left: 10px;
+	border-radius: 16px;	
+	-moz-border-radius: 16px;
+	text-shadow: #666 0px 1px 0px;
+}
+
+#leftNavigation .conversation:hover .date {
+	background: #bbb;
+}
+
+#leftNavigation .conversationSelected:hover .date,
+#leftNavigation .conversationSelected .date {
+	background: #bc4b05;
+	color: #ff9a5c;
+	text-shadow: #7b2d00 0px 1px 0px;
+}
+
+#searchResults .dateRow {
+	overflow: visible;
+	margin-bottom: 5px;	
+}
+
 #datePicker {
 	position: relative;
 	height: 200px;
@@ -285,7 +315,7 @@ div {
 #leftNavigation .conversationSelected,
 #leftNavigation .conversation {
 	text-align: left;
-	font-size: 8pt;	
+	font-size: 9pt;	
 }
 
 #leftNavigation .conversation .selectedArrow {
@@ -295,12 +325,13 @@ div {
 #leftNavigation .conversationSelected .selectedArrow {
 	display: block;
 	position: absolute;
-	top: 5px;
-	right: 5px;
+	top: 3px;
+	right: 3px;
 	font-size: 14pt;
 	color: #ffb77f;
 	text-shadow: #BC4B05 1px 1px 0px;	
 	font-weight: bold;
+	display: none;	
 }
 
 #leftNavigation .conversationSelected,
@@ -322,13 +353,13 @@ div {
 .ircConversationLabel {
 	float: left;
 	width: 60px;
-	text-align: right;
-	padding-right: 5px;
+	text-align: left;
+	padding-right: 10px;
 	clear: left;
 }
 
 .ircConversationValues {
-	padding-left: 65px;
+	padding-left: 70px;
 }
 
 #ircLogSearchResultsLogView {
@@ -365,9 +396,9 @@ div {
 #ircLogSearchResultsLogView div.oddRow,
 #ircLogSearchResultsLogView div.evenRow {
 	font-family: Andale Mono, monospace;
-	font-size: 8pt;
+	font-size: 10pt;
 	width: auto;
-	border-bottom: 1px solid #444;	
+	border-bottom: 1px solid #222;	
 	color: #fff;
 	padding-left: 4px;
 	padding-top: 2px;
@@ -379,13 +410,13 @@ div {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	#ircLogSearchResultsLogView div.oddRow,
 	#ircLogSearchResultsLogView div.evenRow {
-		font-size: 8pt;
+		font-size: 10pt;
 	}
 }
 
 
 #ircLogSearchResultsLogView div.evenRow {
-	background: #1a1a1a;
+	background: #0a0a0a;
 }
 
 #ircLogSearchResultsLogView div.oddRow div,
@@ -427,20 +458,27 @@ div {
 
 .ircConversationParticipant {
 	display: inline;
-    padding-left: 2px;
-    padding-right: 2px;  
+    dpadding-left: 2px;
+    dpadding-right: 2px;  
 	color: #C84B17 ;
 	font-weight: bold;
-	font-size: 8pt;
+	dfont-size: 8pt;
 }
 
 .ircConversationKeyword {
 	display: inline;
-    padding-left: 2px;
-    padding-right: 2px;  
+	dpadding: 2px;
+    dpadding-left: 5px;
+    dpadding-right: 5px;  
 	color: #59912B;
 	font-weight: bold;
-	font-size: 8pt;	
+	dfont-size: 8pt;
+	/*	
+	margin-bottom: 1px;
+	background: #59912B;
+	color: #fff;
+	border-radius: 24px;
+	*/
 }
 
 #leftNavigation .conversationSelected .ircConversationParticipant,
