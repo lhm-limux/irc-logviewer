@@ -1,4 +1,4 @@
 [irc-logviewer]
-; Leave value for irc_logs blank to use the default directory (logs/)
-; or specify an absolute path.
+; Specify a relative or absolute path here.
+; See README for required directory structure and filename conventions.
 irc_log_dir = "../../irc-logs"

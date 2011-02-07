@@ -8,6 +8,10 @@ body {
 	font-size: 10pt;	
 }
 
+div {
+	doutline: 1px solid red;
+}
+
 #header {
 	padding: 8px;
 	background: #c44700;
@@ -21,9 +25,9 @@ body {
 	margin: 0;
 	padding: 0;
 	font-size: 16pt;
-	color: #ffb77f;
-	text-shadow: #7b2d00 0px 2px 0px;
-	font-family: Arial, Helvetica;
+	color: #fff;
+	text-shadow: #7b2d00 0px 3px 0px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 #header .version {
@@ -42,10 +46,7 @@ body {
 	clear: both;
 }
 
-#ircLogSearchContainer {
-	padding: 8px;
-}
-
+/*
 #ircLogSearchFormContainer {
 	margin-top: 5px;
 	margin-bottom: 30px;
@@ -54,17 +55,11 @@ body {
   	margin-right: auto;
 	width: 660px;
 }
+*/
 
 #ircLogSearchForm {	
 	margin: 0;
-	padding: 10px;
-	float: left;	
-	border: 1px solid #ddd;	
-	-border-radius: 8pt;	
-	-moz-border-radius: 8pt;
-	-webkit-border-radius: 8pt;
-	-khtml-border-radius: 8pt;
-	background-color: #f9f9f9;
+	padding: 0px;
 }
 
 #ircLogSearchForm select {
@@ -73,7 +68,7 @@ body {
 	margin-top: 5px;	
 }
 
-#ircLogSearchForm label {	
+#selectChannel label {	
 	float: left;
 	font-weight: bold;
 	background: transparent;
@@ -85,6 +80,7 @@ body {
 	font-size: 8pt;
 	font-weight: bold;
 	margin-top: 6px;
+	width: 50px;
 }
 
 #ircLogSearchForm button  {
@@ -101,12 +97,12 @@ body {
 	font-size: 12px;
 	font-weight: bold;
 	text-shadow: #fff 0px 1px 0px;
-	-border-top-right-radius: .5em;				
-	-moz-border-radius-topright: .5em;
-	-webkit-border-top-right-radius: .5em;	
-	-border-bottom-right-radius: .5em;				
-	-moz-border-radius-bottomright: .5em;
-	-webkit-border-bottom-right-radius: .5em;		
+	-border-top-right-radius: .4em;				
+	-moz-border-radius-topright: .4em;
+	-webkit-border-top-right-radius: .4em;	
+	-border-bottom-right-radius: .4em;				
+	-moz-border-radius-bottomright: .4em;
+	-webkit-border-bottom-right-radius: .4em;		
 	border-width: 1px;
 	color: #606060;
 	border: solid 1px #b7b7b7;
@@ -157,14 +153,18 @@ body {
 	background: -moz-linear-gradient(top, #eeeeee 0%, #FFFFFF 32%); /* firefox */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(32%,#FFFFFF)); /* webkit */	
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#FFFFFF',GradientType=0 ); /* ie */
-	-border-top-left-radius: .5em;				
-	-moz-border-radius-topleft: .5em;
-	-webkit-border-top-left-radius: .5em;	
-	-border-bottom-left-radius: .5em;				
-	-moz-border-radius-bottomleft: .5em;
-	-webkit-border-bottom-left-radius: .5em;	
+	-border-top-left-radius: .4em;				
+	-moz-border-radius-topleft: .4em;
+	-webkit-border-top-left-radius: .4em;	
+	-border-bottom-left-radius: .4em;				
+	-moz-border-radius-bottomleft: .4em;
+	-webkit-border-bottom-left-radius: .4em;	
 	position: relative;
-	outline-width: thin;
+	doutline-width: thin;
+	
+	/* I don't normally like disabling outlines, but the only browser / OS
+	   combination that doesn't glitch here is Safari on Mac specifically */
+	outline: none; 
 	padding-top: 4px;
 	padding-bottom: 5px;
 	padding-left: 6px;
@@ -178,29 +178,36 @@ body {
 	}
 }
 
-#ircLogSearchResults {
-	display: none;
-	clear: left;
+#searchResults {
 	position: relative;
-	padding-top: 10px;
+	overflow: auto;
+	padding-top: 8px;
 }
 
-#ircLogSearchResultsConversations {
+#datePicker {
+	position: relative;
+	height: 200px;
+	border-top: 1px solid #bbb;
+}
+
+#datePicker .heading {
+	background: #ddd; 
+	background: -moz-linear-gradient(top, #F2F2F2 0%, #D6D6D6 100%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F2F2F2), color-stop(100%,#D6D6D6)); /* webkit */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#D6D6D6',GradientType=0 ); /* ie */	
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
+	color: #444;
+	border-bottom: 1px solid #bbb;	
+}
+
+#leftNavigation {
 	font-size: 9pt;
 	position: relative;
 	display: block;
 	width: 240px;
 	height: auto;
 	float: left;
-	border: 1px solid #ddd;	
-	background-color: #fff;
-	-border-top-left-radius: 12px;
-	-border-bottom-left-radius: 12px;				
-	-moz-border-radius-topleft: 12px;
-	-moz-border-radius-bottomleft: 12px;	
-	-webkit-border-top-left-radius: 12px;
-	-webkit-border-bottom-left-radius: 12px;	
-	padding-bottom: 20px;	
+	border-right: 1px solid #bbb;		
 	background: #f9f9f9;
 	font-size: 8pt;
 }
@@ -224,7 +231,7 @@ body {
 	left: 10px;
 }
 
-#ircLogSearchResultsConversations .heading {
+#leftNavigation .heading {
 	font-size: 11pt;
 	text-shadow: #fff 0px 1px 0;
 	color: #777;	
@@ -243,8 +250,8 @@ body {
 	font-weight: bold;
 }
 
-#ircLogSearchResultsConversations .conversation, 
-#ircLogSearchResultsConversations .conversationSelected {
+#leftNavigation .conversation, 
+#leftNavigation .conversationSelected {
 	position: relative;
 	color: #777;
 	padding: 8px;
@@ -254,7 +261,7 @@ body {
 }
 
 
-#ircLogSearchResultsConversations .conversation:hover {
+#leftNavigation .conversation:hover {
 	cursor: pointer;
 	color: #555;	
 	background: #fff;	
@@ -263,31 +270,44 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* ie */	
 }
 
-#ircLogSearchResultsConversations .conversation:hover .ircConversationLabel {
+#leftNavigation .conversation:hover .ircConversationLabel {
 	color: #888;
-	
 }
 
-#ircLogSearchResultsConversationsWrapper {
+/*
+#leftNavigationWrapper {
 	overflow: auto;
 	border-bottom: 1px solid #ddd;
 	border-top: 1px solid #ddd;	
 	background: #f9f9f9;	
 }
 
-#ircLogSearchResultsConversationsWrapper .loadingConversationsPlaceholder {
+#leftNavigationWrapper .loadingConversationsPlaceholder {
 	position: absolute; 
 	width: 100%;
 	text-align: center;
 	font-weight: bold;
 	top: 50%;
 }
+*/
+#selectChannel {
+	position: relative;
+	overflow: auto;	
+	padding-left: 8px;	
+}
 
-#ircLogSearchResultsConversations .conversation .selectedArrow {
+#searchBox {
+	padding-top: 8px;	
+	padding-left: 8px;	
+	position: relative;
+	overflow: auto;	
+}
+
+#leftNavigation .conversation .selectedArrow {
 	display: none;
 }
 
-#ircLogSearchResultsConversations .conversationSelected .selectedArrow {
+#leftNavigation .conversationSelected .selectedArrow {
 	display: block;
 	position: absolute;
 	top: 5px;
@@ -298,8 +318,8 @@ body {
 	font-weight: bold;
 }
 
-#ircLogSearchResultsConversations .conversationSelected,
-#ircLogSearchResultsConversations .conversationSelected:hover {
+#leftNavigation .conversationSelected,
+#leftNavigation .conversationSelected:hover {
 	border-top: 1px solid #ffb28a;
 	border-bottom: 1px solid #BC4B05;		
 	background: #c44700;
@@ -309,8 +329,8 @@ body {
 	color: #ffdecb;
 }
 
-#ircLogSearchResultsConversations .conversationSelected .ircConversationLabel,
-#ircLogSearchResultsConversations .conversationSelected:hover .ircConversationLabel {
+#leftNavigation .conversationSelected .ircConversationLabel,
+#leftNavigation .conversationSelected:hover .ircConversationLabel {
 	color: #ffb77f;
 }
 
@@ -329,19 +349,10 @@ body {
 #ircLogSearchResultsLogView {
 	position: relative;
 	display: block;
-	left: 4px;
-	margin-right: 5px;
-	margin-left: 0px;
-	padding-bottom: 10px;
-	overflow: auto;
-	-border-top-right-radius: 12px;
-	-border-bottom-right-radius: 12px;				
-	-moz-border-radius-topright: 12px;
-	-moz-border-radius-bottomright: 12px;	
-	-webkit-border-top-right-radius: 12px;
-	-webkit-border-bottom-right-radius: 12px;	
+	dleft: 1px;
+	overflow: auto;	
 	background: #f9f9f9;
-	border: 1px solid #ddd;	
+	dborder: 1px solid #ddd;	
 }
 
 #ircLogSearchResultsLogView .heading {
@@ -446,15 +457,12 @@ body {
 	font-size: 8pt;	
 }
 
-#ircLogSearchResultsConversations .conversationSelected .ircConversationParticipant,
-#ircLogSearchResultsConversations .conversationSelected .ircConversationKeyword {
+#leftNavigation .conversationSelected .ircConversationParticipant,
+#leftNavigation .conversationSelected .ircConversationKeyword {
 	color: white;
 }
 
 #ircLogSearchResultsLogViewWrapper {
 	overflow: auto;
-	margin-bottom: 9px;
-	border-bottom: 1px solid #ddd;	
-	border-top: 1px solid #ddd;	
 	background: #000;	
 }

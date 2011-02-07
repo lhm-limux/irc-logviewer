@@ -124,10 +124,9 @@ ircLogSearch.search = function() {
 		return;		
 	
 	// Reset results view
-	jQuery('#ircLogSearchResultsConversations').html('<div class="heading">Searching for Conversations...</div><div id="ircLogSearchResultsConversationsWrapper"><div class="loadingConversationsPlaceholder"><img src="images/ajax-loader.gif" alt="Loading" /></div></div>');	
+	jQuery('#searchResults').html('Searching...');	
 	jQuery('#ircLogSearchResultsLogView').html('<div class="heading">Chat Log</div>');	
-	ircLogSearch.redrawWindow();	
-	jQuery('#ircLogSearchResults').show();
+	ircLogSearch.redrawWindow();
 					
 	$.ajax({		
 		url: "ajax/Search.php?timestamp=" + (new Date().getTime().toString()) + "&server=" + encodeURIComponent(server) + "&channel=" + encodeURIComponent(channel) + "&keywords=" + encodeURIComponent(keywords),
@@ -140,7 +139,7 @@ ircLogSearch.search = function() {
 				ircLogSearch.getConversation(server, channel, json['searchResults'][0].startTime, json['searchResults'][0].endTime, keywords);
 
 			
-			jQuery('#ircLogSearchResultsConversations').html('<div class="heading">Conversations (' + json['searchResults'].length + ')</div><div id="ircLogSearchResultsConversationsWrapper"></div>');
+			jQuery('#searchResults').html('');
 			
 
 			for (var i = 0; i < json['searchResults'].length; i++) {
@@ -185,7 +184,7 @@ ircLogSearch.search = function() {
 					}
 				}
 										
-				jQuery('#ircLogSearchResultsConversationsWrapper').append(	'<div class="' + conversationClass + '" '
+				jQuery('#searchResults').append(	'<div class="' + conversationClass + '" '
 																    +'onclick="ircLogSearch.selectConversation(this, \''+server+'\', \''+channel+'\', \'' + json['searchResults'][i].startTime+'\', \'' + json['searchResults'][i].endTime+'\', \''+encodeURIComponent(keywords)+'\');">'
 
 															+'<div><div class="ircConversationLabel">Start:</div>' + json['searchResults'][i].startTime + '</div>'
@@ -218,13 +217,13 @@ ircLogSearch.redrawWindow = function() {
 	    windowHeight = document.body.clientHeight;
 	  }
 	  
-	var newHeight = windowHeight - 180;
-	if (newHeight < 200)
-		newHeight = 200;
+	//var newHeight = windowHeight - 331;
+	if (windowHeight < 200)
+		windowHeight = 400;
 		
-	if (document.getElementById('ircLogSearchResultsConversationsWrapper'))
-		document.getElementById('ircLogSearchResultsConversationsWrapper').style.height = newHeight + "px";	
+	if (document.getElementById('searchResults'))
+		document.getElementById('searchResults').style.height = (windowHeight - 340) + "px";	
 	if (document.getElementById('ircLogSearchResultsLogViewWrapper'))	
-		document.getElementById('ircLogSearchResultsLogViewWrapper').style.height = newHeight + "px";	
+		document.getElementById('ircLogSearchResultsLogViewWrapper').style.height = (windowHeight - 70) + "px";	
 
 }	
