@@ -6,6 +6,7 @@ body {
 	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
 	color: #444;
 	font-size: 10pt;	
+ 	overflow-y: hidden;	/* TODO: Remove this tmp hack (not cross browser, will create a wrapper element) */
 }
 
 div {
@@ -36,7 +37,6 @@ div {
 	right: 15px;
 	font-weight: bold;
 	color: #7b2d00;
-	color: #7b2d00;
 	text-shadow: #ffb77f 0px 1px 0px;	
 }
 
@@ -45,17 +45,6 @@ div {
 	text-align: center;
 	clear: both;
 }
-
-/*
-#ircLogSearchFormContainer {
-	margin-top: 5px;
-	margin-bottom: 30px;
-	clear: both;	
- 	margin-left: auto;
-  	margin-right: auto;
-	width: 660px;
-}
-*/
 
 #ircLogSearchForm {	
 	margin: 0;
@@ -66,21 +55,6 @@ div {
 	float: left;	
 	margin-right: 15px;	
 	margin-top: 5px;	
-}
-
-#selectChannel label {	
-	float: left;
-	font-weight: bold;
-	background: transparent;
-	z-index: 0;
-	color: #666;
-	margin-right: 5px;
-	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
-	color: #444;
-	font-size: 8pt;
-	font-weight: bold;
-	margin-top: 6px;
-	width: 50px;
 }
 
 #ircLogSearchForm button  {
@@ -146,7 +120,7 @@ div {
 #ircLogSearchForm input {
 	float: left;
 	width: 150px;
-	color: #666;
+	color: #444;
 	font-size: 10pt;
 	border: 1px solid #ccc;
 	background: #fff;
@@ -171,6 +145,15 @@ div {
 	dmax-height: 20px;	
 }
 
+#ircLogSearchForm input:hover }
+	color: #444;		
+}
+
+#ircLogSearchForm input:hover,
+#ircLogSearchForm button:hover {
+	border-color: #aaa;
+}
+
 /* Gecko specific rendering tweak */
 @-moz-document url-prefix() {
 	#ircLogSearchForm input {	
@@ -178,27 +161,6 @@ div {
 	}
 }
 
-#searchResults {
-	position: relative;
-	overflow: auto;
-	padding-top: 8px;
-}
-
-#datePicker {
-	position: relative;
-	height: 200px;
-	border-top: 1px solid #bbb;
-}
-
-#datePicker .heading {
-	background: #ddd; 
-	background: -moz-linear-gradient(top, #F2F2F2 0%, #D6D6D6 100%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F2F2F2), color-stop(100%,#D6D6D6)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#D6D6D6',GradientType=0 ); /* ie */	
-	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
-	color: #444;
-	border-bottom: 1px solid #bbb;	
-}
 
 #leftNavigation {
 	font-size: 9pt;
@@ -231,24 +193,6 @@ div {
 	left: 10px;
 }
 
-#leftNavigation .heading {
-	font-size: 11pt;
-	text-shadow: #fff 0px 1px 0;
-	color: #777;	
-	padding: 6px;
-	text-align: center;	
-	-border-top-left-radius: 12px;				
-	-moz-border-radius-topleft: 12px;
-	-webkit-border-top-left-radius: 12px;
-	background: #ddd; 
-	background: -moz-linear-gradient(top, #F2F2F2 0%, #D6D6D6 100%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F2F2F2), color-stop(100%,#D6D6D6)); /* webkit */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#D6D6D6',GradientType=0 ); /* ie */
-	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
-	color: #444;
-	font-size: 9pt;
-	font-weight: bold;
-}
 
 #leftNavigation .conversation, 
 #leftNavigation .conversationSelected {
@@ -274,33 +218,74 @@ div {
 	color: #888;
 }
 
-/*
-#leftNavigationWrapper {
-	overflow: auto;
-	border-bottom: 1px solid #ddd;
-	border-top: 1px solid #ddd;	
-	background: #f9f9f9;	
-}
-
-#leftNavigationWrapper .loadingConversationsPlaceholder {
-	position: absolute; 
-	width: 100%;
-	text-align: center;
-	font-weight: bold;
-	top: 50%;
-}
-*/
 #selectChannel {
 	position: relative;
 	overflow: auto;	
-	padding-left: 8px;	
+	padding-left: 4px;	
+	padding-bottom: 4px;
+	padding-top: 4px;	
+}
+
+
+#selectChannel label {	
+	float: left;
+	font-weight: bold;
+	background: transparent;
+	z-index: 0;
+	color: #666;
+	margin-right: 5px;
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
+	color: #444;
+	font-size: 8pt;
+	font-weight: bold;
+	margin-top: 6px;
+	width: 50px;
+	text-align: right;
+	padding-left: 4px;
+}
+
+#search {
+	position: relative;
+	overflow: auto;	
 }
 
 #searchBox {
-	padding-top: 8px;	
-	padding-left: 8px;	
 	position: relative;
-	overflow: auto;	
+	overflow: auto;
+	padding-left: 8px;
+	padding-bottom: 8px;
+}
+
+#searchResults {
+	position: relative;
+	overflow: auto;
+	text-align: center;
+	font-size: 10pt;
+}
+
+#searchResults p {
+	color: #555;
+}
+
+#searchResults .loading {
+	margin-top: 20px;
+	text-shadow: #ddd 0px 1px 0px;	
+}
+
+#searchResults .loading p {
+	padding: 0px;
+	margin-top: 10px;
+}
+
+#datePicker {
+	position: relative;
+	height: 200px;
+}
+
+#leftNavigation .conversationSelected,
+#leftNavigation .conversation {
+	text-align: left;
+	font-size: 8pt;	
 }
 
 #leftNavigation .conversation .selectedArrow {
@@ -355,26 +340,27 @@ div {
 	dborder: 1px solid #ddd;	
 }
 
+#leftNavigation .heading,
 #ircLogSearchResultsLogView .heading {
 	text-shadow: #fff 0px 1px 0;
 	font-size: 11pt;
-	color: #777;
 	padding: 6px;
 	text-align: center;	
-	-border-top-right-radius: 12px;				
-	-moz-border-radius-topright: 12px;	
-	-webkit-border-top-right-radius: 12px;	
-	border-bottom: 1px solid #ddd;		
+	color: #444;
+	font-size: 9pt;
+	font-weight: bold;	
 	background: #ddd; 
 	background: -moz-linear-gradient(top, #F2F2F2 0%, #D6D6D6 100%); /* firefox */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F2F2F2), color-stop(100%,#D6D6D6)); /* webkit */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#D6D6D6',GradientType=0 ); /* ie */	
 	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
 	color: #444;
-	font-size: 9pt;
-	font-weight: bold;	
+	border-bottom: 1px solid #bbb;		
 }
 
+#leftNavigation .heading {
+	border-top: 1px solid #bbb;	
+}
 
 #ircLogSearchResultsLogView div.oddRow,
 #ircLogSearchResultsLogView div.evenRow {

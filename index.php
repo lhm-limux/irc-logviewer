@@ -35,12 +35,17 @@
 					<select id="ircChannel" name="channel"></select>				
 				</div>							
 			
-				<div id="searchBox">
-					<input type="text" id="keywords" name="keywords" value="<?php echo $searchKeywords ?>" />
-					<button type="button" name="search" onclick="ircLogSearch.search(); return false;" value="search">Search</button>
+				<div id="search">
+					<div id="searchBox">
+						<input type="text" id="keywords" name="keywords" value="<?php echo $searchKeywords ?>" />
+						<button type="button" name="search" onclick="ircLogSearch.search(); return false;" value="search">Search</button>
+					</div>						
+					<div class="heading">Search Results</div>					
+					<div id="searchResults">
+						<p>No results to display</p>
+					</div>	
 				</div>
-				<div id="searchResults"></div>				
-				
+											
 				<div id="datePicker">
 					<div class="heading">View By Date</div>
 					%CALENDAR_DATE_PICKER%

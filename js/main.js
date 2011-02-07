@@ -68,7 +68,7 @@ ircLogSearch.selectConversation = function(element, server, channel, startTime, 
 
 ircLogSearch.getConversation = function(server, channel, startTime, endTime, keywords) {
 
-	jQuery('#ircLogSearchResultsLogViewWrapper').html('<div class="heading">Chat Log</div>');	
+	jQuery('#ircLogSearchResultsLogViewWrapper').html('');	
 	
 	$.ajax({		
 		url: "ajax/GetConversation.php?timestamp=" + (new Date().getTime().toString()) + "&server=" + encodeURIComponent(server) + "&channel=" + encodeURIComponent(channel) + "&startTime=" + encodeURIComponent(startTime)+ "&endTime=" + encodeURIComponent(endTime)+"&keywords="+keywords,
@@ -76,7 +76,7 @@ ircLogSearch.getConversation = function(server, channel, startTime, endTime, key
 		dataType: "json",
 		success: function(json) {
 
-			jQuery('#ircLogSearchResultsLogView').html('<div class="heading">Chat Log: ' + channel +'</div>'
+			jQuery('#ircLogSearchResultsLogView').html('<div class="heading">Chat Log - ' + channel +'</div>'
                                                       +'<div id="ircLogSearchResultsLogViewWrapper"></div>');		
 			ircLogSearch.redrawWindow();
 		
@@ -124,8 +124,7 @@ ircLogSearch.search = function() {
 		return;		
 	
 	// Reset results view
-	jQuery('#searchResults').html('Searching...');	
-	jQuery('#ircLogSearchResultsLogView').html('<div class="heading">Chat Log</div>');	
+	jQuery('#searchResults').html('<div class="loading"><img src="images/ajax-loader.gif" alt="Loading"/><p>Searching...</p></div>');	
 	ircLogSearch.redrawWindow();
 					
 	$.ajax({		
