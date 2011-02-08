@@ -9,6 +9,12 @@ jQuery(document).ready(function() {
 
 	// Get list of IRC servers on page load
 	ircLogSearch.populateIrcServerList();
+	
+	jQuery("#datePicker").datepicker();
+	jQuery( "#leftNavigationAccordion" ).accordion({
+		fillSpace: true,
+		icons: false	
+	});	
 });
 
 var ircLogSearch = {};
@@ -112,7 +118,6 @@ ircLogSearch.getConversation = function(server, channel, date, startTime, endTim
 	
 ircLogSearch.search = function() {
 
-
 	var server = document.getElementById('ircServer').value;
 	var channel = document.getElementById('ircChannel').value;
 	var keywords = document.getElementById('keywords').value;
@@ -122,6 +127,9 @@ ircLogSearch.search = function() {
 	
 	if (keywords == "")
 		return;		
+
+	// Show search results accordion
+	$( "#leftNavigationAccordion" ).accordion("option", "active", 1);
 	
 	// Reset results view
 	jQuery('#searchResults').html('<div class="loading"><img src="images/ajax-loader.gif" alt="Loading"/><p>Searching...</p></div>');	
@@ -223,8 +231,9 @@ ircLogSearch.redrawWindow = function() {
 	if (windowHeight < 200)
 		windowHeight = 400;
 		
-	if (document.getElementById('searchResults'))
-		document.getElementById('searchResults').style.height = (windowHeight - 340) + "px";	
+	if (document.getElementById('leftNavigationAccordion'))
+		document.getElementById('leftNavigationAccordion').style.height = (windowHeight - 212) + "px";	
+
 	if (document.getElementById('ircLogSearchResultsLogViewWrapper'))	
 		document.getElementById('ircLogSearchResultsLogViewWrapper').style.height = (windowHeight - 70) + "px";	
 

@@ -163,9 +163,8 @@ div {
 	position: relative;
 	display: block;
 	width: 240px;
-	height: auto;
-	float: left;
-	border-right: 1px solid #bbb;		
+	doverflow: auto;
+	float: left;		
 	background: #f1f1f1;
 	font-size: 8pt;
 }
@@ -192,6 +191,7 @@ div {
 
 #leftNavigation .conversation, 
 #leftNavigation .conversationSelected {
+	font-family: Arial, Helvetica, sans-serif;
 	position: relative;
 	color: #777;
 	padding: 8px;
@@ -262,6 +262,7 @@ div {
 	background: #f9f9f9;	
 }
 
+
 #searchResults p {
 	color: #555;
 }
@@ -277,22 +278,24 @@ div {
 }
 
 #leftNavigation .conversation .date {
-	display: inline;	
+	display: block;	
 	font-size: 10pt;
 	padding: 2px;
 	text-align: center;
 	background: #aaa;
 	color: #fff;
-	padding-right: 8px;
-	padding-left: 8px;		
-	margin-left: 10px;
+	padding-right: 10px;
+	padding-left: 10px;		
+	margin-left: auto;
+	margin-right: auto;	
+	width: 150px;
 	border-radius: 16px;	
 	-moz-border-radius: 16px;
 	text-shadow: #666 0px 1px 0px;
 }
 
 #leftNavigation .conversation:hover .date {
-	background: #bbb;
+	background: #ccc;
 }
 
 #leftNavigation .conversationSelected:hover .date,
@@ -300,6 +303,7 @@ div {
 	background: #bc4b05;
 	color: #ff9a5c;
 	text-shadow: #7b2d00 0px 1px 0px;
+	font-weight: bold;
 }
 
 #searchResults .dateRow {
@@ -307,9 +311,9 @@ div {
 	margin-bottom: 5px;	
 }
 
-#datePicker {
+#viewByDate {
 	position: relative;
-	height: 200px;
+	height: 300px;
 }
 
 #leftNavigation .conversationSelected,
@@ -320,19 +324,45 @@ div {
 
 #leftNavigation .conversation .selectedArrow {
 	display: none;
+	font-size: 12pt;
 }
 
+#leftNavigation .conversation:hover .selectedArrow {
+	display: block;
+	position: absolute;
+	top: 40%;
+	right: 10px;
+	text-shadow: #7b2d00 1px 1px 0px;	
+	padding-left: 6px;	
+	padding-top: 2px;
+	width: 15px;
+	height: 20px;
+	overflow: visible;	
+	border-radius: 50px;	
+	-moz-border-radius: 50px;		
+	background: #ddd;
+	color: #fff;
+	text-shadow: #999 1px 1px 0px;	
+}
+
+#leftNavigation .conversationSelected:hover .selectedArrow,
 #leftNavigation .conversationSelected .selectedArrow {
 	display: block;
 	position: absolute;
-	top: 3px;
-	right: 3px;
-	font-size: 14pt;
-	color: #ffb77f;
-	text-shadow: #BC4B05 1px 1px 0px;	
-	font-weight: bold;
-	display: none;	
+	top: 40%;
+	right: 10px;
+	padding-left: 6px;
+	padding-top: 2px;	
+	width: 15px;
+	height: 20px;
+	overflow: visible;	
+	border-radius: 50px;	
+	-moz-border-radius: 50px;
+	background: #BC4B05;	
+	color: #ff9a5c;		
+	text-shadow: #7b2d00 1px 1px 0px;		
 }
+
 
 #leftNavigation .conversationSelected,
 #leftNavigation .conversationSelected:hover {
@@ -369,6 +399,7 @@ div {
 	overflow: auto;	
 	background: #f9f9f9;
 	dborder: 1px solid #ddd;	
+	border-left: 1px solid #bbb;	
 }
 
 #leftNavigation .heading,
@@ -489,4 +520,43 @@ div {
 #ircLogSearchResultsLogViewWrapper {
 	overflow: auto;
 	background: #000;	
+}
+
+#datePicker {
+	width: 200px;
+	height: 170px;
+	margin: auto;
+	margin-top: 12px;
+}
+
+#datePicker .ui-datepicker {
+	display: block;
+}	
+
+#leftNavigationAccordion .ui-accordion-header {
+	text-shadow: #fff 0px 1px 0;
+	font-size: 11pt;
+	dpadding: 6px;
+	text-align: center;	
+	color: #444;
+	font-size: 9pt;
+	font-weight: bold;	
+	background: #ddd; 
+	background: -moz-linear-gradient(top, #F2F2F2 0%, #D6D6D6 100%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F2F2F2), color-stop(100%,#D6D6D6)); /* webkit */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#D6D6D6',GradientType=0 ); /* ie */	
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
+	color: #444;
+	border-bottom: 1px solid #bbb;	
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-color: #bbb;	
+}
+
+#leftNavigationAccordion .ui-accordion-content {
+	padding: 0px;
+	background: #f9f9f9;
+	border-color: #bbb;
+	border-radius: 0px;
+	-moz-border-radius: 0px;	
 }
