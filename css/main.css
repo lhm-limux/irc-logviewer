@@ -536,7 +536,6 @@ div {
 #leftNavigationAccordion .ui-accordion-header {
 	text-shadow: #fff 0px 1px 0;
 	font-size: 11pt;
-	dpadding: 6px;
 	text-align: center;	
 	color: #444;
 	font-size: 9pt;
@@ -551,6 +550,9 @@ div {
 	border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-color: #bbb;	
+	margin: 0px;
+	margin-top: -1px;	
+	border-right: 0px;	
 }
 
 #leftNavigationAccordion .ui-accordion-content {
@@ -558,5 +560,8 @@ div {
 	background: #f9f9f9;
 	border-color: #bbb;
 	border-radius: 0px;
-	-moz-border-radius: 0px;	
+	-moz-border-radius: 0px;
+	margin-top: -1px;
+	margin-bottom: -0px;
+	border-right: 0px;
 }
