@@ -5,11 +5,11 @@ class PathValidator {
 	// Provides a means to check $server is a valid directory
 	// Designed to be secure regardless of Apache or PHP configuration.
 	public function validateServerLogDir($baseLogDir, $server) {
-				
+
 		// Check base log dir is valid
 		if (!is_dir($baseLogDir))
 			throw new Exception("IRC log directory not valid. Please check config.ini");
-		
+
 		// Check server name is valid (i.e. points to a valid dir)
 		$serverIsValid = false;
 		$dirHandle = opendir($baseLogDir);
@@ -24,18 +24,18 @@ class PathValidator {
 		}
 		if ($serverIsValid !== true)
 			throw new Exception("Server name not valid (no log directory exists for this server).");
-					
-		return true;		
+
+		return true;
 	}
 
 	// Provides a means to check both $server and $channel are valid directories
 	// Designed to be secure regardless of Apache or PHP configuration.
 	public function validateChannelLogDir($baseLogDir, $server, $channel) {
-				
+
 		// Check base log dir is valid
 		if (!is_dir($baseLogDir))
 			throw new Exception("IRC log directory not valid. Please check config.ini");
-		
+
 		// Validate $server
 		PathValidator::validateServerLogDir($baseLogDir, $server);
 
@@ -53,10 +53,10 @@ class PathValidator {
 		}
 		if ($channelIsValid !== true)
 			throw new Exception("Channel name not valid (no log directory exists for this channel on the specified server).");
-		
-		return true;		
+
+		return true;
 	}
-	
+
 }
 
 ?>
