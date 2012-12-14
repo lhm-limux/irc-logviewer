@@ -3,8 +3,10 @@
 	// As a side effect, also causes browsers to more aggressively cache as long as it remains unchanged.
 	$version = "0.24b";
 
-	if (!file_exists(dirname(_FILE_).'/lib/config.ini'))
+	if (!file_exists(dirname(__FILE__) . '/lib/config.ini'))
 		die("<b>Error:</b> ./lib/config.ini not found! Please copy <i>config.ini-dist</i> to <i>config.ini</i> and configure appropriately.");
+	if (!isset($searchKeywords))
+		$searchKeywords = "";
 ?>
 <!DOCTYPE html>
 <html>
