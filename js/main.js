@@ -64,11 +64,11 @@ ircLogSearch.populateIrcChannelList = function() {
 }
 
 
-ircLogSearch.selectConversation = function(element, server, channel, startTime, endTime, keywords) {
+ircLogSearch.selectConversation = function(element, server, channel, date, startTime, endTime, keywords) {
 	$(".conversation").removeClass("conversationSelected");
 	$(element).addClass("conversationSelected");
 
-	ircLogSearch.getConversation(server, channel, startTime, endTime, keywords);
+	ircLogSearch.getConversation(server, channel, date, startTime, endTime, keywords);
 }
 
 

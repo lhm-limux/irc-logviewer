@@ -26,7 +26,7 @@ class GetConversation {
 
 		$startTimeStamp = strtotime($startTime);
 		$endTimeStamp = strtotime($endTime);
-		$date = date('Y-m-d', strtotime($startTime));
+		$date = date('Y-m-d', $startTimeStamp);
 
 		$baseLogDir = $GLOBALS['irc-logviewer-config']['irc-logviewer']['irc_log_dir'];
 
@@ -72,13 +72,17 @@ class GetConversation {
 		$lineCount = 0;
 		$matchingLineCount = 0;
 		$fileHandle = fopen($pathToFile, "r") or die("Unable to open IRC log file for reading.");
+
+		// Convert keywords to preg or'd match
+		$keywords_regmatch = '/' . implode('|', array_unique(explode(' ', preg_quote($keywords), 10))) . '/i';
+
 		while(!feof($fileHandle)) {
 			$line = fgets($fileHandle);
 
 			$lineCount++;
 
 			// Get timestamp (based on filename + time on line where match was found)
-			@list($time, $username, $msg) = explode(' ', $line, 3);
+			@list($time, $username, $msg) = preg_split('/ +/', $line, 3);
 			$username = preg_replace("/[^A-z0-9:_()\\|-]/", "", $username);
 			$time = preg_replace("/[^0-9:]/", "", $time);
 			$timestamp = strtotime($date." ".$time);
