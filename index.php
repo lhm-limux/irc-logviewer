@@ -10,15 +10,16 @@
 <html>
 	<head>
 		<title>FireBreath IRC Log Viewer</title>
-		<link rel="stylesheet" href="css/jquery-ui.css?v=<?php echo $version ?>" />
+		<link rel="stylesheet" href="/javascript/jquery-ui/css/smoothness/jquery-ui.min.css?v=<?php echo $version ?>" />
 		<link rel="stylesheet" href="css/main.css?v=<?php echo $version ?>" />
-		<script type="text/javascript" src="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7Bname%3A%22maps%22%2Cversion%3A3%2Cother_params%3A%22sensor%3Dfalse%22%7D%2C%7B%22name%22%3A%22jquery%22%2C%22version%22%3A%221.3.2%22%7D%2C%7B%22name%22%3A%22jqueryui%22%2C%22version%22%3A%221.7.2%22%7D%5D%7D"></script>
-		<script src="js/jquery.ui.datepicker.js?v=<?php echo $version ?>"></script>
-		<script src="js/jquery.effects.core.js?v=<?php echo $version ?>"></script>
-		<script src="js/jquery.ui.widget.js?v=<?php echo $version ?>"></script>
-		<script src="js/jquery.ui.accordion.js?v=<?php echo $version ?>"></script>
+		<script type="text/javascript" src="/javascript/jquery/jquery.min.js?v=<?php echo $version ?>"></script>
+		<script type="text/javascript" src="/javascript/jquery-ui/jquery-ui.min.js?v=<?php echo $version ?>"></script>
+		<script type="text/javascript" src="/javascript/jquery-ui/ui/jquery.ui.datepicker.min.js?v=<?php echo $version ?>"></script>
+		<script type="text/javascript" src="/javascript/jquery-ui/ui/jquery.effects.core.min.js?v=<?php echo $version ?>"></script>
+		<script type="text/javascript" src="/javascript/jquery-ui/ui/jquery.ui.widget.min.js?v=<?php echo $version ?>"></script>
+		<script type="text/javascript" src="/javascript/jquery-ui/ui/jquery.ui.accordion.min.js?v=<?php echo $version ?>"></script>
 		<script src="js/main.js?v=<?php echo $version ?>"></script>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" /
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	</head>
 	<body>
