@@ -1,4 +1,6 @@
 
+var logDates = [];
+
 jQuery(document).ready(function() {
 	jQuery(window).resize(function() {
 		ircLogSearch.redrawWindow();
@@ -7,10 +9,33 @@ jQuery(document).ready(function() {
 	// Set layout correctly on page load
 	ircLogSearch.redrawWindow();
 
+	jQuery("#datePicker").datepicker({
+		onSelect: function(dateText, inst) {
+			var server = $('#ircServer option:selected').val();
+			var channel = $('#ircChannel option:selected').val();
+			ircLogSearch.getConversation(server, channel, dateText, '00:00', '23:59');
+		},
+		dateFormat: "yy-mm-dd",
+		showButtonPanel: true,
+		firstDay: 1,
+		disabled: true,
+		beforeShowDay: function(date) {
+			ymd = $.datepicker.formatDate('yy-mm-dd', date);
+			if (ymd in logDates) {
+				return [true, "", logDates[ymd]];
+			} else {
+				return [false,"","No log"];
+			}
+		},
+		onChangeMonthYearType: function(year, month, inst) {
+			inst.datepicker('disable');
+			ircLogSearch.updateLogDays( year + '-' + ("00" + month).slice (-1) );
+		}
+	});
+
 	// Get list of IRC servers on page load
 	ircLogSearch.populateIrcServerList();
 
-	jQuery("#datePicker").datepicker();
 	jQuery( "#leftNavigationAccordion" ).accordion({
 		fillSpace: true,
 		icons: false
@@ -41,6 +66,26 @@ ircLogSearch.populateIrcServerList = function() {
 	});
 }
 
+ircLogSearch.updateLogDays = function(date) {
+	var server = $('#ircServer option:selected').val();
+	var channel = $('#ircChannel option:selected').val();
+
+	jQuery.ajax({
+		url: "ajax/ListMonthLogs.php?timestamp=" + (new Date().getTime().toString())
+			+ "&server=" + encodeURIComponent(server)
+			+ "&channel=" + encodeURIComponent(channel)
+			+ "&date="  + encodeURIComponent(date),
+		type: "GET",
+		dataType: "json",
+		success: function(result) {
+
+			logDates = result;
+			$("#datePicker").datepicker('refresh');
+			$("#datePicker").datepicker('enable');
+		}
+	});
+}
+
 ircLogSearch.populateIrcChannelList = function() {
 
 	var server = $('#ircServer option:selected').val();
@@ -59,6 +104,7 @@ ircLogSearch.populateIrcChannelList = function() {
 			});
 			$select.html( vSelect );
 
+			ircLogSearch.updateLogDays( $("#datePicker").datepicker('getDate').toString() );
 		}
 	});
 }
