@@ -27,13 +27,12 @@ ircLogSearch.populateIrcServerList = function() {
 		dataType: "json",
 		success: function(result) {
 
-			$("#ircServer").html("");
-			$("#ircChannel").html("");
-
-			for (var i = 0; i < result.length; i++) {
-				var options = $('#ircServer').attr('options');
-				options[options.length] = new Option(result[i], result[i]);
-			}
+			var $select = $("#ircServer");
+			var vSelect = '';
+			$.each(result, function (i, v) {
+				vSelect += '<option value="' + v + '">' + v + '</option>';
+			});
+			$select.html( vSelect );
 
 			// Calling this method sucessfully always triggers the IRC Channel List to be re-populated too.
 			ircLogSearch.populateIrcChannelList();
@@ -53,12 +52,13 @@ ircLogSearch.populateIrcChannelList = function() {
 		dataType: "json",
 		success: function(result) {
 
-			$("#ircChannel").html("");
+			var $select = $("#ircChannel");
+			var vSelect = '';
+			$.each(result, function (i, v) {
+				vSelect += '<option value="' + v + '">' + v + '</option>';
+			});
+			$select.html( vSelect );
 
-			for (var i = 0; i < result.length; i++) {
-					var options = $('#ircChannel').attr('options');
-					options[options.length] = new Option(result[i], result[i]);
-			}
 		}
 	});
 }

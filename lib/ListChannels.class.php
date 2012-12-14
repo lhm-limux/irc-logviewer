@@ -15,7 +15,7 @@ class ListChannels {
 		// Check $server is a valid log dir (throws exception if not)
 		PathValidator::validateServerLogDir($baseLogDir, $server);
 
-		$logDir = $baseLogDir."/".addslashes($server)."/".addslashes($channel);
+		$logDir = $baseLogDir."/".addslashes($server);
 
 		$result = array();
 		$dirHandle = opendir($logDir);

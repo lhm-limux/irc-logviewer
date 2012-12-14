@@ -216,16 +216,18 @@ div {
 	color: #888;
 }
 
-#selectChannel {
+#selectChannel,
+#selectServer {
 	position: relative;
 	overflow: auto;	
 	padding-left: 4px;	
-	padding-bottom: 4px;
-	padding-top: 4px;	
+	padding-bottom: 1px;
+	padding-top: 1px;	
 }
 
 
-#selectChannel label {	
+#selectChannel label,
+#selectServer label {	
 	float: left;
 	font-weight: bold;
 	background: transparent;
@@ -240,6 +242,7 @@ div {
 	width: 50px;
 	text-align: right;
 	padding-left: 4px;
+	vertical-align: middle;
 }
 
 #search {

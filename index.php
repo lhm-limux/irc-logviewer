@@ -36,9 +36,11 @@
 		<!-- Search Results -->
 			<div id="leftNavigation">
 				<!-- Select Server / Channel -->
-				<div id="selectChannel">
+				<div id="selectServer">
 					<label for="ircServer">Server:</label>
 					<select id="ircServer" name="server" onchange="ircLogSearch.populateIrcChannelList();"></select>
+				</div>
+				<div id="selectChannel">
 					<label for="ircChannel">Channel:</label>
 					<select id="ircChannel" name="channel"></select>
 				</div>
