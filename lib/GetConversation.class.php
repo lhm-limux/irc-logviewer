@@ -1,6 +1,7 @@
 <?php
 
 include_once(dirname(__FILE__).'/PathValidator.class.php');
+include_once(dirname(__FILE__).'/functions.php');
 
 // Load config file
 if (!array_key_exists('irc-logviewer-config', $GLOBALS))
@@ -90,8 +91,10 @@ class GetConversation {
 			$logLine = null;
 			if ($time && $username) {
 				$msg = preg_replace("/\n$/", "", $msg);
-				$msg = htmlentities($msg);
-				$msg = $this->highliteKeywords($msg, $keywords);
+				$has_keyword = preg_match_all($keywords_regmatch, $msg, $matches);
+				$msg = line_as_html($msg);
+				if ($has_keyword > 0)
+					$msg = '<span class="keyword">' . $msg . '</span>';
 
 				if ($timestamp >= $startTimeStamp) {
 					$logLine = array('line' => $lineCount, 'time' => $time, 'user' => $username, 'msg' => $msg);
@@ -105,8 +108,10 @@ class GetConversation {
 				$timestamp = strtotime($date." ".$time);
 
 				$msg = preg_replace("/\n$/", "", $msg);
-				$msg = htmlentities($msg);
-				$msg = $this->highliteKeywords($msg, $keywords);
+				$has_keyword = preg_match_all($keywords_regmatch, $msg, $matches);
+				$msg = line_as_html($msg);
+				if ($has_keyword > 0)
+					$msg = '<span class="keyword">' . $msg . '</span>';
 
 				if ($timestamp >= $startTimeStamp) {
 					$logLine = array('line' => $lineCount, 'time' => $time, 'msg' => $msg);
@@ -131,6 +136,33 @@ class GetConversation {
 
 		return $this->conversation;
 	}
+
+	private function highliteUrls($line) {
+		// FIXME: 1) is borked regex 2) Conflicts with highliteKeywords() :-( Not sure how to resolve the latter problem.
+		$pattern = "@\b(https?://)?(([0-9a-zA-Z_!~*'().&=+$%-]+:)?[0-9a-zA-Z_!~*'().&=+$%-]+\@)?(([0-9]{1,3}\.){3}[0-9]{1,3}|([0-9a-zA-Z_!~*'()-]+\.)*([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]\.[a-zA-Z]{2,6})(:[0-9]{1,4})?((/[0-9a-zA-Z_!~*'().;?:\@&=+$,%#-]+)*/?)@";
+		$line = preg_replace($pattern, '<a href="\0" target="_blank">\0</a>', $line);
+		return $line;
+	}
+
+	private function highliteKeywords($line, $keywords) {
+
+		// Allow mo more than 10 keywords (to avoid easily overloading server)
+		$keywords = explode(" ", $keywords, 10);
+
+		// Remove any duplicates (for efficency)
+		$keywords = array_unique($keywords);
+
+		foreach ($keywords as $keyword) {
+			$keyword_escaped = htmlentities(preg_quote($keyword));
+			$newLine = @preg_replace("/$keyword_escaped/i", "<span class=\"keyword\">".htmlentities("$0")."</span>", $line);
+
+			if ($newLine)
+				$line = $newLine;
+		}
+
+		return $line;
+	}
+
 }
 
 ?>
