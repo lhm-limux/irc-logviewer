@@ -210,17 +210,17 @@ ircLogSearch.search = function() {
 				for (user in json['searchResults'][i].users) {
 					if (usersHtml != '')
 						usersHtml += ', ';
-
-					//usersHtml += '<div class="ircConversationParticipant">' + user + '</div> (' + json['searchResults'][i].users[user] + ')';
 					usersHtml += '<div class="ircConversationParticipant">' + user + '</div>';
 				}
+
+				// WORKAROUND: I couldn't figure out working CSS code.
+				if (usersHtml == '')
+					usersHtml += '<div class="ircConversationParticipant">???</div>';
 
 				var keywordsHtml = '';
 				for (keyword in json['searchResults'][i].keywords) {
 					if (keywordsHtml != '')
 						keywordsHtml += ', ';
-
-					//keywordsHtml += '<div class="ircConversationKeyword">' + keyword + '</div> (' + json['searchResults'][i].keywords[keyword] + ')';
 					keywordsHtml += '<div class="ircConversationKeyword">' + keyword + '</div>';
 				}
 
